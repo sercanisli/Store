@@ -40,5 +40,10 @@ namespace Repositories.Concrete.EntityFramework
         {
             _context.Set<T>().Add(entity);
         }
+
+        public void Remove(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
     }
 }

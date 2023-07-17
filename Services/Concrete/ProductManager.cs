@@ -39,5 +39,23 @@ namespace Services.Concrete
             _manager.Products.Create(product);
             _manager.Save();
         }
+
+        public void Update(Product product)
+        {
+            var entity= _manager.Products.GetById(product.Id, true);
+            entity.ProductName = product.ProductName;
+            entity.Price = product.Price;
+            _manager.Save();
+        }
+
+        public void DeleteProduct(int id)
+        {
+            Product product = GetById(id, false);
+            if (product!=null)
+            {
+             _manager.Products.DeleteProduct(product);
+             _manager.Save();
+            }
+        }
     }
 }
