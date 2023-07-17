@@ -21,5 +21,7 @@ namespace Repositories.Concrete.EntityFramework
         {
             return FindByCondition(p => p.Id == id, trackChanges);
         }
+
+        public void CreateProduct(Product product) => Create(product);
     }
 }

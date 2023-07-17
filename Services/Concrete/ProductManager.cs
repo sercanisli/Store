@@ -33,5 +33,11 @@ namespace Services.Concrete
 
             return product;
         }
+
+        public void CreateProduct(Product product)
+        {
+            _manager.Products.Create(product);
+            _manager.Save();
+        }
     }
 }
