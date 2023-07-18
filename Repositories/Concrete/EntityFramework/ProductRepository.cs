@@ -24,5 +24,6 @@ namespace Repositories.Concrete.EntityFramework
 
         public void CreateProduct(Product product) => Create(product);
         public void DeleteProduct(Product product) => Remove(product);
+        public void UpdateOneProduct(Product entity) => Update(entity);
     }
 }

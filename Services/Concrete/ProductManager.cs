@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Entities.DTOs;
 using Entities.Models;
 using Repositories.Contracts;
 using Services.Contracts;
@@ -12,10 +14,12 @@ namespace Services.Concrete
     public class ProductManager : IProductService
     {
         private readonly IRepositoryManager _manager;
+        private readonly IMapper _mapper;
 
-        public ProductManager(IRepositoryManager manager)
+        public ProductManager(IRepositoryManager manager, IMapper mapper)
         {
             _manager = manager;
+            _mapper = mapper;
         }
 
         public IEnumerable<Product> GetAllProducts(bool trackChanges)
@@ -34,18 +38,18 @@ namespace Services.Concrete
             return product;
         }
 
-        public void CreateProduct(Product product)
+        public void CreateProduct(ProductDTOForInsertion productDtoForInsertion)
         {
+            Product product = _mapper.Map<Product>(productDtoForInsertion);
             _manager.Products.Create(product);
             _manager.Save();
         }
 
-        public void Update(Product product)
+        public void Update(ProductDTOForUpdate productDtoForUpdate)
         {
-            var entity= _manager.Products.GetById(product.Id, true);
-            entity.ProductName = product.ProductName;
-            entity.Price = product.Price;
-            _manager.Save();
+            var entity = _mapper.Map<Product>(productDtoForUpdate);    
+            _manager.Products.UpdateOneProduct(entity);
+            _manager.Save(); 
         }
 
         public void DeleteProduct(int id)
@@ -56,6 +60,13 @@ namespace Services.Concrete
              _manager.Products.DeleteProduct(product);
              _manager.Save();
             }
+        }
+
+        public ProductDTOForUpdate GetByIdForUpdate(int id, bool trackChanges)
+        {
+            var product = GetById(id, trackChanges);
+            var productDTOForUpdate = _mapper.Map<ProductDTOForUpdate>(product);
+            return productDTOForUpdate;
         }
     }
 }
