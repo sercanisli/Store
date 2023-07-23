@@ -80,5 +80,10 @@ namespace Services.Concrete
         {
             return _manager.Products.GetAllProductsWithDetails(productRequestParameters);
         }
+
+        public IEnumerable<Product> GetLastestProducts(int n, bool trackChanges)
+        {
+            return _manager.Products.FindAll(trackChanges).OrderByDescending(p => p.Id).Take(n);
+        }
     }
 }

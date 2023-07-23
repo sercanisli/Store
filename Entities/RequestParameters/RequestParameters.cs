@@ -8,6 +8,6 @@ namespace Entities.RequestParameters
 {
     public abstract class RequestParameters
     {
-        public int CategorId { get; set; }
+        public string? SearchTerm { get; set; }
     }
 }

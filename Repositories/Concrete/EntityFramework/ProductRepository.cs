@@ -36,7 +36,11 @@ namespace Repositories.Concrete.EntityFramework
 
         public IQueryable<Product> GetAllProductsWithDetails(ProductRequestParameters productRequestParameters)
         {
-            return _context.Products.FilterByCatgoryId(productRequestParameters.CategorId);
+            return _context.Products.FilteredByCatgoryId(productRequestParameters.CategorId)
+                .FilteredBySearchTerm(productRequestParameters.SearchTerm)
+                .FilteredByPrice(productRequestParameters.MinPrice, productRequestParameters.MaxPrice,
+                    productRequestParameters.IsValidPrice).ToPaginate(productRequestParameters.PageNumber,
+                    productRequestParameters.PageSize);
         }
     }
 }
