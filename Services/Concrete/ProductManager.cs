@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Entities.DTOs;
 using Entities.Models;
+using Entities.RequestParameters;
 using Repositories.Contracts;
 using Services.Contracts;
 
@@ -67,6 +68,17 @@ namespace Services.Concrete
             var product = GetById(id, trackChanges);
             var productDTOForUpdate = _mapper.Map<ProductDTOForUpdate>(product);
             return productDTOForUpdate;
+        }
+
+        public IEnumerable<Product> GetShowcaseProducts(bool trackChanges)
+        {
+            var products = _manager.Products.GetShowcaseProducts(trackChanges);
+            return products;
+        }
+
+        public IEnumerable<Product> GetAllProductsWithDetails(ProductRequestParameters productRequestParameters)
+        {
+            return _manager.Products.GetAllProductsWithDetails(productRequestParameters);
         }
     }
 }

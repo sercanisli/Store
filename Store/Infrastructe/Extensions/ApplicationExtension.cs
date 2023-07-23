@@ -18,5 +18,16 @@ namespace Store.Infrastructe.Extensions
                 context.Database.Migrate();
             }
         }
+
+        public static void ConfigureLocalization(this WebApplication webApplication)  //bir önceki methodu IApplicationBuilder üzerinden genişlettik bunu da Web app üzerinden genişletice<.
+        {
+            //bu bir middleware dir ve kültür bilgilerini set etmeye yarar
+            webApplication.UseRequestLocalization(options =>
+            {
+                options.AddSupportedCultures("en-EN") //kültür desteğini ekleriz.
+                    .AddSupportedCultures("en-EN")
+                    .SetDefaultCulture("en-EN");
+            }); 
+        }
     }
 }
