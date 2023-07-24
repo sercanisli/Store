@@ -1,4 +1,4 @@
-using Store.Infrastructe.Extensions;
+using Store.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureIdentity();
 builder.Services.ConfigureSession();
 builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServiceRegistration();
@@ -27,7 +28,8 @@ app.UseSession();
 app.UseHttpsRedirection();
 
 app.UseRouting();
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
@@ -46,5 +48,6 @@ app.UseEndpoints(endpoints =>
 
 app.ConfigureAndCheckMigrations();
 app.ConfigureLocalization();
+app.ConfigureDefaultAdminUser();
 
 app.Run();

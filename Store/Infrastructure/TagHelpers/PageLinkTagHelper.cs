@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Store.Models;
 
-namespace Store.Infrastructe.TagHelpers
+namespace Store.Infrastructure.TagHelpers
 {
     [HtmlTargetElement("div", Attributes = "page-model")]
     public class PageLinkTagHelper : TagHelper

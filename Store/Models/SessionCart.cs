@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Entities.Models;
-using Store.Infrastructe.Extensions;
+using Store.Infrastructure.Extensions;
 
 namespace Store.Models
 {

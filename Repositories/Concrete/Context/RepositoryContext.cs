@@ -1,16 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Entities.Models;
-using Repositories.Config;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Repositories.Concrete.Context
 {
-    public class RepositoryContext : DbContext
+    public class RepositoryContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
