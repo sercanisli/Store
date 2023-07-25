@@ -8,8 +8,7 @@ namespace Store.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Password is Required")]
         public string Password { get; set; }
-
-        //Login ekranından sonra kaldııekrana gidebilsin
+        
         private string? _returnUrl;
 
         public string ReturnUrl

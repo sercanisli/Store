@@ -24,7 +24,7 @@ namespace Repositories.Concrete.EntityFramework
             _orderRepository = orderRepository;
         }
 
-        public IProductRepository Products => _productRepository; //buna ulaşılmak istenirse buna git.
+        public IProductRepository Products => _productRepository;
 
         public ICategoryRepository Category => _categoryRepository;
 

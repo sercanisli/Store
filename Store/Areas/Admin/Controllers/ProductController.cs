@@ -30,7 +30,7 @@ namespace Store.Areas.Admin.Controllers
                 ItemsPerPage = productRequestParameters.PageSize,
                 TotalItems = _serviceManager.ProductService.GetAllProducts(false).Count()
             };
-            return View(new ProductListViewModel() //bu ifadenin kullanılabilmesi için product index sayfasında @model ProductListViewModel tanımlaması gerekir.
+            return View(new ProductListViewModel() 
             {
                 Products = products,
                 Pagination = pagination

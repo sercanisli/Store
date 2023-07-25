@@ -68,7 +68,7 @@ namespace Store.Areas.Admin.Controllers
         {
             return View(new ResetPasswordDTO()
             {
-                UserName = id //parametre ile aldığımız id ifadesini burada UserName'e aktarırız.
+                UserName = id 
             });
         }
 
