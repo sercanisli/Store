@@ -14,5 +14,14 @@ namespace Repositories.Concrete.EntityFramework
         public CategoryRepository(RepositoryContext context) : base(context)
         {
         }
+
+        public void CreateCategory(Category category) => Create(category);
+
+        public void DeleteCategory(Category category) => Remove(category);
+
+        public Category? GetById(int id, bool trackChanges)
+        {
+            return FindByCondition(c => c.Id == id, false);
+        }
     }
 }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.DTOs
+namespace Presentation
 {
-    public record ProductDTOForUpdate : ProductDTO
+    public class AssemblyReference
     {
-        public bool Showcase { get; set; }
     }
 }

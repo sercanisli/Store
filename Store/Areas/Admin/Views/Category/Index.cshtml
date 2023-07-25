@@ -1,2 +1,31 @@
-﻿
-Categories Admin Page
+﻿@model IEnumerable<Category>
+
+<div class="text-center">
+    <h6 class="display-">Categories</h6>
+    <div class="d-flex justify-content-end my-3">
+    <a class="btn btn-outline-success" asp-action="Create">
+        <i class="fa fa-plus"></i>Create
+    </a>
+    </div>
+</div>
+
+<ul class="list-group my-3">
+    @foreach (var category in Model)
+    {
+        <div class="row my-3 d-flex">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-9">
+                        <li class="list-group-item">@category.CategoryName</li>
+                    </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@category.Id"><i class="fa fa-trash"></i>Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    }
+    
+</ul>

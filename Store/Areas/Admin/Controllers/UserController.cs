@@ -1,10 +1,13 @@
 ﻿using Entities.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
+using System.Data;
 
 namespace Store.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private readonly IServiceManager _serviceManager;
@@ -58,6 +61,38 @@ namespace Store.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            return View();
+        }
+
+        public async Task<IActionResult> ResetPassword([FromRoute(Name = "id")] string id)
+        {
+            return View(new ResetPasswordDTO()
+            {
+                UserName = id //parametre ile aldığımız id ifadesini burada UserName'e aktarırız.
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDTO resetPasswordDto)
+        {
+            var result = await _serviceManager.AuthService.ResetPassword(resetPasswordDto);
+            if (result != null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteOneUser([FromForm]UserDTO userDto)
+        {
+            var result = await _serviceManager.AuthService.DeleteOneUser(userDto.UserName);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");  
+            }
             return View();
         }
     }

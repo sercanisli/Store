@@ -2,6 +2,7 @@ using Store.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -30,7 +31,6 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
@@ -44,6 +44,8 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}"
     );
     endpoints.MapRazorPages();
+
+    endpoints.MapControllers();
 });
 
 app.ConfigureAndCheckMigrations();

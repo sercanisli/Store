@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.DTOs
 {
-    public record ProductDTOForUpdate : ProductDTO
+    public record CategoryDTOForInsertion:CategoryDTO
     {
-        public bool Showcase { get; set; }
     }
 }

@@ -9,6 +9,9 @@ namespace Repositories.Contracts
 {
     public interface ICategoryRepository : IRepositoryBase<Category>
     {
+        void CreateCategory(Category category);
+        Category? GetById(int id, bool trackChanges);
+        void DeleteCategory(Category category);
 
     }
 }

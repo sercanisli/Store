@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Concrete.Context;
@@ -16,7 +17,7 @@ namespace Store.Infrastructure.Extensions
         {
             services.AddDbContext<RepositoryContext>(options =>
             {
-                options.UseSqlite(configuration.GetConnectionString("SqlConnection"),
+                options.UseSqlServer(configuration.GetConnectionString("MSSqlConnection"),
                     b => b.MigrationsAssembly("Store"));
 
                 options.EnableSensitiveDataLogging(true); 

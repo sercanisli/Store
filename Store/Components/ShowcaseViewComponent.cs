@@ -12,10 +12,12 @@ namespace Store.Components
             _serviceManager = serviceManager;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string page = "default")
         {
-            var product = _serviceManager.ProductService.GetShowcaseProducts(false);
-            return View(product);
+            var products = _serviceManager.ProductService.GetShowcaseProducts(false);
+            return page.Equals("default")
+                ? View(products)
+                : View("List", products);
         }
     }
 }

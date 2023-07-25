@@ -12,11 +12,10 @@ namespace Store.Components
             _serviceManager = serviceManager;
         }
 
-        public IViewComponentResult Invoke() //render edilmesini istediğim için bu dönüş türünü seçiyorum.
+        public IViewComponentResult Invoke()
         {
             var categories = _serviceManager.CategoryService.GetAllCategories(false);
-            return View(categories); //bu yapıyı kullandığımızda bunun View dosyasını
-            ///Views/[controller]/Components/[ViewComponent]/Default.cshtl yolunu kullanarak eklememiz gerekiyor.
+            return View(categories);
         }
     }
 }

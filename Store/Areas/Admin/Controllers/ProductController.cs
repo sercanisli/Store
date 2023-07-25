@@ -1,13 +1,17 @@
 ﻿using Entities.DTOs;
 using Entities.Models;
+using Entities.RequestParameters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Services.Contracts;
+using Store.Models;
 
 namespace Store.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	public class ProductController : Controller
+    [Authorize(Roles = "Admin")]
+    public class ProductController : Controller
 	{
 		private readonly IServiceManager _serviceManager;
 
@@ -16,14 +20,26 @@ namespace Store.Areas.Admin.Controllers
             _serviceManager = serviceManager;
         }
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index([FromQuery]ProductRequestParameters productRequestParameters)
         {
-            var model = _serviceManager.ProductService.GetAllProducts(false);
-            return View(model);
+            ViewData["Title"] = "Products";
+            var products = _serviceManager.ProductService.GetAllProductsWithDetails(productRequestParameters);
+            var pagination = new Pagination()
+            {
+                CurrentPage = productRequestParameters.PageNumber,
+                ItemsPerPage = productRequestParameters.PageSize,
+                TotalItems = _serviceManager.ProductService.GetAllProducts(false).Count()
+            };
+            return View(new ProductListViewModel() //bu ifadenin kullanılabilmesi için product index sayfasında @model ProductListViewModel tanımlaması gerekir.
+            {
+                Products = products,
+                Pagination = pagination
+            });
         }
         [HttpGet]
         public ActionResult Create()
         {
+            TempData["info"] = "Please fill the form";
             ViewBag.Categories = GetCategorieSelectList();
             return View();
         }
@@ -41,6 +57,7 @@ namespace Store.Areas.Admin.Controllers
                 }
                 productDtoForInsertion.ImageUrl = String.Concat("/images/", file.FileName);
                 _serviceManager.ProductService.CreateProduct(productDtoForInsertion);
+                TempData["success"] = $"{productDtoForInsertion.ProductName} has been created";
                 return RedirectToAction("Index");
             }
 
