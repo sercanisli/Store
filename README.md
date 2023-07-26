@@ -94,3 +94,7 @@ After clicking the submit button;
 We can see the change
 
 ![afteredituser](https://github.com/sercanisli/Store/assets/128610192/0af0917a-2454-40af-b314-24e32a9c0d1f)
+
+api/products;
+
+![Ekran Alıntısı](https://github.com/sercanisli/Store/assets/128610192/514af645-74e2-4b7b-9cd8-63aeca58c161)
